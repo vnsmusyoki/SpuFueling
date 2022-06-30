@@ -1,5 +1,24 @@
 <?php
-$inventory_name = $inventory_cost =$description =  $message = '';
+$tank_capacity = $tank_name = $message = '';
+?>
+<?php
+$tankid = $_GET['inventory'];
+include '../db-conection.php';
+$bookings = "SELECT * FROM `inventory` WHERE `inventory_id` = '$tankid'";
+$querybookings = mysqli_query($conn, $bookings);
+$bookingsrows = mysqli_num_rows($querybookings);
+if ($bookingsrows >= 1) {
+    while ($fetch  = mysqli_fetch_assoc($querybookings)) {
+        $globalid = $fetch['inventory_id'];
+        $globalname = $fetch['inventory_item'];
+        $globaldescription = $fetch['inventory_description'];
+        $globalcost = $fetch['inventory_cost'];
+    }
+    global $globalname;
+    global $globalcost;
+    global $globaldescription;
+    global $globalid;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,12 +54,12 @@ $inventory_name = $inventory_cost =$description =  $message = '';
                         <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-home"></i>
-                            </span> Add Inventory
+                            </span> Edit Inventory
                         </h3>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    <span></span>Creating New Record <i
+                                    <span></span>Updating Inventory <i
                                         class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
                                 </li>
                             </ul>
@@ -56,35 +75,38 @@ $inventory_name = $inventory_cost =$description =  $message = '';
                                       <?php
 
                                         if (isset($_POST["createaccount"])) {
-                                            require 'functions/add-inventory-validation.php';
+                                            require 'functions/edit-inventory-validation.php';
                                         }
                                         ?>
                                         <?php echo $message; ?>
                                  
-
-
-                                <div class=" row">
+                                        <div class=" row">
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Inventory Item</label>
                                                 <input type="text" class="form-control" id="exampleInputName1"
-                                                    placeholder="inventory names" name="inventory_name">
+                                                    placeholder="inventory names" name="inventory_name"
+                                                    value="<?php echo $globalname; ?>">
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Inventory Cost</label>
                                                 <input type="number" min="1" class="form-control" id="exampleInputName1"
-                                                    placeholder="write the cost here" name="inventory_cost">
+                                                    placeholder="write the cost here" name="inventory_cost"
+                                                    value="<?php echo $globalcost; ?>">
                                             </div>
                                         </div>
 
                                 </div>
+                                <input type="hidden" name="inventory_id" value="<?php echo $globalid; ?>">
+
                                 <div class="form-group">
                                     <label for="exampleTextarea1">Inventory Description</label>
                                     <textarea class="form-control" id="exampleTextarea1" rows="4"
-                                        name="description"></textarea>
+                                        name="description"><?php echo $globaldescription; ?></textarea>
                                 </div>
+
                                 <button type="submit" class="btn btn-gradient-primary mr-2"
                                     name="createaccount">Submit</button>
                                 <button class="btn btn-light" type="reset">Cancel</button>
