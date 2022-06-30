@@ -38,6 +38,40 @@
              </div>
          </li>
          <li class="nav-item">
+             <a class="nav-link" data-toggle="collapse" href="#ui-basic-tanks" aria-expanded="false"
+                 aria-controls="ui-basic-tanks">
+                 <span class="menu-title">Fuel Tanks</span>
+                 <i class="menu-arrow"></i>
+                 <i class="mdi mdi-battery"></i>
+             </a>
+             <div class="collapse" id="ui-basic-tanks">
+                 <ul class="nav flex-column sub-menu">
+                     <li class="nav-item"> <a class="nav-link" href="add-fueltank.php">Add new
+                             Fuel Tank</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="manage-employees.php">Manage
+                             Employees</a>
+                     </li>
+                 </ul>
+             </div>
+         </li>
+         <li class="nav-item">
+             <a class="nav-link" data-toggle="collapse" href="#ui-basic-invent" aria-expanded="false"
+                 aria-controls="ui-basic-invent">
+                 <span class="menu-title">Inventory</span>
+                 <i class="menu-arrow"></i>
+                 <i class="mdi mdi-format-list-bulleted"></i>
+             </a>
+             <div class="collapse" id="ui-basic-invent">
+                 <ul class="nav flex-column sub-menu">
+                     <li class="nav-item"> <a class="nav-link" href="add-inventory.php">Add new
+                             Inventory</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="manage-employees.php">Manage
+                             Inventories</a>
+                     </li>
+                 </ul>
+             </div>
+         </li>
+         <li class="nav-item">
              <a class="nav-link" href="pages/icons/mdi.html">
                  <span class="menu-title">Icons</span>
                  <i class="mdi mdi-contacts menu-icon"></i>

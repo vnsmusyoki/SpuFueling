@@ -49,56 +49,41 @@
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th> Full Name </th>
-                                                    <th> Email Address </th>
-                                                    <th> Phone Number </th>
-                                                    <th> ID Number </th>
-                                                    <th> Net Salary </th>
-                                                    <th>Kin Names</th>
-                                                    <th>Kin Phone Number</th>
+                                                    <th> ID </th>
+                                                    <th> Tank Name </th>
+                                                    <th> Tank Capacity </th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
                                                 include '../db-conection.php';
-                                                $bookingplans = "SELECT * FROM `employee`";
+                                                $bookingplans = "SELECT * FROM `fuel_tank`";
                                                 $querybookingsplans = mysqli_query($conn, $bookingplans);
                                                 $bookingsplansrows = mysqli_num_rows($querybookingsplans);
                                                 if ($bookingsplansrows >= 1) {
                                                     while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
-                                                        $inid = $fetch['employee_id'];
-                                                        $firstname = $fetch['employee_first_name'];
-                                                        $emailaddress = $fetch['employee_email_address'];
-                                                        $othernames = $fetch['employee_other_names'];
-                                                        $idnumber = $fetch['employee_id_number'];
-                                                        $kinaddress = $fetch['employee_email_address'];
-                                                        $kinname = $fetch['residence_next_of_kin_full_names'];
-                                                        $kinnumber = $fetch['employee_next_of_kin_phone_number'];
-                                                        $phonenumber = $fetch['employee_phone_number'];
-                                                        $netsalary = $fetch['employee_net_salary'];
+                                                        $id = $fetch['fuel_tank_id'];
+                                                        $name = $fetch['fuel_tank_name'];
+                                                        $capacity = $fetch['fuel_tank_capacity']; 
 
 
                                                         echo "
                                                     
                                                             <tr>
-                                                                <td>$firstname $othernames</td>
-                                                                <td>$emailaddress</td>
-                                                                <td>$phonenumber</td>
-                                                                <td>$idnumber</td>
-                                                                <td>$netsalary</td>
-                                                                <td>$kinname</td>
-                                                                <td>$kinnumber</td>
+                                                                <td>$id</td>
+                                                                <td>$name</td>
+                                                                <td>$capacity Litres</td> 
                                                                 <td>
-                                                                <button type='button' class='btn btn-outline-success btn-rounded btn-icon'>
+                                                                <a href='edit-fuel-tank.php?tank=$id'> <button   class='btn btn-outline-success btn-rounded btn-icon'>
                                                                 <i class='mdi mdi-bullseye'></i>
-                                                              </button> 
-                                                              <button type='button' class='btn btn-outline-warning btn-rounded btn-icon'>
-                                                                <i class='mdi mdi-grease-pencil'></i>
-                                                              </button>
-                                                              <button type='button' class='btn btn-outline-danger btn-rounded btn-icon'>
+                                                              </button> </a>
+                                                            
+                                                              <a href='delete-fuel-tank.php?tank=$id'> <button class='btn btn-outline-danger btn-rounded btn-icon'>
                                                                 <i class='mdi mdi-recycle'></i>
                                                               </button>
+                                                              </a> 
+                                                             
                                                                 </td>
                                                                 
                                                                  
