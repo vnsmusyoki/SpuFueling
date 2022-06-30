@@ -19,7 +19,7 @@
                                   <li><a href="about.html">About</a></li>
                                   <li><a href="service.html">Services</a></li>
                                   <li><a href="gallery.html">Gallery</a></li>
-                                  <li><a href="blog.html">Blog</a></li>
+                                  <li><a href="login.php">Login</a></li>
                                   <li><a href="contact.html">Contact Us</a></li>
                               </ul>
                               <div class="solar_toggle">
