@@ -72,6 +72,23 @@
              </div>
          </li>
          <li class="nav-item">
+             <a class="nav-link" data-toggle="collapse" href="#ui-basic-supplier" aria-expanded="false"
+                 aria-controls="ui-basic-supplier">
+                 <span class="menu-title">Suppliers</span>
+                 <i class="menu-arrow"></i>
+                 <i class="mdi mdi-format-list-bulleted"></i>
+             </a>
+             <div class="collapse" id="ui-basic-supplier">
+                 <ul class="nav flex-column sub-menu">
+                     <li class="nav-item"> <a class="nav-link" href="add-supplier.php">Add new
+                             Supplier</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="manage-employees.php">Manage
+                             Drivers</a>
+                     </li>
+                 </ul>
+             </div>
+         </li>
+         <li class="nav-item">
              <a class="nav-link" href="pages/icons/mdi.html">
                  <span class="menu-title">Icons</span>
                  <i class="mdi mdi-contacts menu-icon"></i>
