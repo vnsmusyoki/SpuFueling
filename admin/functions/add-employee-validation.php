@@ -1,4 +1,4 @@
-<?php 
+<?php
 include '../db-conection.php';
 
 $firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
@@ -14,7 +14,7 @@ $username = mysqli_real_escape_string($conn, $_POST['username']);
 $password = mysqli_real_escape_string($conn, $_POST['password']);
 $passwordlength = strlen($password);
 $usernamelength = strlen($username);
-$phonelength = strlen($phone_number);
+$phonelength = strlen($phonenumber);
 if (
     empty($firstname) || empty($othernames) || empty($phonenumber) || empty($emailaddress) || empty($idnumber) ||
     empty($netsalary) || empty($residence) || empty($kinfullname) || empty($kinphonenumber) || empty($username) || empty($password)
@@ -24,7 +24,7 @@ if (
 toastr.error('Please Provide all the details');
 </script>
 ";
-} else if (!preg_match("/^[a-zA-z ]*$/", $full_name)) {
+} else if (!preg_match("/^[a-zA-z]*$/", $firstname) || !preg_match("/^[a-zA-z ]*$/", $othernames) || !preg_match("/^[a-zA-z ]*$/", $kinfullname)) {
     $message = "
 <script>
 toastr.error('Provided an invalid names characters');
@@ -36,7 +36,7 @@ toastr.error('Provided an invalid names characters');
 toastr.error('Username format is incorrect');
 </script>
 ";
-} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+} else if (!filter_var($emailaddress, FILTER_VALIDATE_EMAIL)) {
     $message = "
 <script>
 toastr.error('Incorrect email address. Provide a valid one.');
@@ -54,7 +54,7 @@ toastr.error('Phone number must have 10 digits.');
         toastr.error('Username field require at least 8 characters.');
     </script>";
 } else {
-    $checkphone = "SELECT *  FROM `instructor` WHERE `instructor_mobile` = '$phone_number'";
+    $checkphone = "SELECT *  FROM `employee` WHERE `employee_phone_number` = '$phonenumber'";
     $queryphone = mysqli_query($conn, $checkphone);
     $checkphonerows = mysqli_num_rows($queryphone);
     if ($checkphonerows >= 1) {
@@ -63,17 +63,17 @@ toastr.error('Phone number must have 10 digits.');
     toastr.error('Phone Number already exists. Please confirm your number again .');
     </script>";
     } else {
-        $checkemail = "SELECT * FROM `instructor` WHERE `instructor_email` = '$email'";
+        $checkemail = "SELECT * FROM `employee` WHERE `employee_email_address` = '$emailaddress' OR `employee_id_number` = '$idnumber'";
         $queryemail = mysqli_query($conn, $checkemail);
         $checkemailrows = mysqli_num_rows($queryemail);
         if ($checkemailrows >= 1) {
             $message = "
     <script>
-    toastr.error('Email Address already exists. Please confirm your email  again .');
+    toastr.error('Email Address/ ID Number already exists. Please confirm your email  again .');
     </script>";
         } else {
 
-            $checkusername = "SELECT * FROM `login` WHERE `login_user_name` = '$username'";
+            $checkusername = "SELECT * FROM `login` WHERE `login_username` = '$username'";
             $queryusername = mysqli_query($conn, $checkusername);
             $checkusernamerows = mysqli_num_rows($queryusername);
             if ($checkusernamerows >= 1) {
@@ -82,35 +82,29 @@ toastr.error('Phone number must have 10 digits.');
     toastr.error('Username already exists. Please confirm your email  again .');
     </script>";
             } else {
-                $password = md5("password");
-                $insertlogin = "INSERT INTO `login`(`login_user_name`,`login_password`, `login_rank`, `login_admin_id`,
-    `login_member_id`, `login_instructor_id`) VALUES ('$username', '$password','member', null, null, null)";
+                $password = md5($password);
+                $insertlogin = "INSERT INTO `employee`(`employee_first_name`, `employee_other_names`, `employee_id_number`, `employee_email_address`, `employee_residence`, `residence_next_of_kin_full_names`, `employee_next_of_kin_phone_number`, `employee_phone_number`, `employee_net_salary`) VALUES ('$firstname','$othernames','$idnumber','$emailaddress','$residence','$kinfullname','$kinphonenumber','$phonenumber','$netsalary')";
                 $querylogin = mysqli_query($conn, $insertlogin);
                 $lastid = mysqli_insert_id($conn);
                 if ($querylogin) {
 
-                    $addstaff = "INSERT INTO `member`(`member_full_name`, `member_email`, `member_mobile`, `member_date_of_birth`,
-    `member_gender`, `member_joining_date`, `member_end_date`, `member_user_id`) VALUES ('$full_name', '$email',
-    '$phone_number', '$date_of_birth', '$gender', '$start_date', '$end_date', '$lastid')";
+                    $addstaff = "INSERT INTO `login`(`login_username`, `login_rank`, `login_admin`, `login_employee`, `login_password`) VALUES ('$username','employee',null,'$lastid','$password')";
                     $querystaff = mysqli_query($conn, $addstaff);
                     $lastmemberid = mysqli_insert_id($conn);
                     if ($querystaff) {
-                        $updatelogin = "UPDATE `login` SET `login_member_id` = '$lastmemberid' WHERE `login_id` = '$lastid'";
-                        $queryupdatelogin = mysqli_query($conn, $updatelogin);
-                        if ($queryupdatelogin) {
-                            $message = "
-    <script>
-    toastr.success('Registration Successful. Please login to continue.');
-    </script>";
-                            echo "<script>
-    window.location.replace('all-members.php');
-    </script>";
-                        } else {
-                            $message = "
-    <script>
-    toastr.error('Registration Failed. Please try again.');
-    </script>";
-                        }
+
+                        $message = "
+                                        <script>
+                                        toastr.success('Registration Successful. Please login to continue.');
+                                        </script>";
+                        echo "<script>
+                                    window.location.replace('manage-employees.php');
+                                    </script>";
+                    } else {
+                        $message = "
+                                    <script>
+                                    toastr.error('Registration Failed. Please try again.');
+                                    </script>";
                     }
                 }
             }
