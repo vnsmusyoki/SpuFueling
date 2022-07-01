@@ -27,12 +27,12 @@
                         <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-home"></i>
-                            </span> Manage Inventories
+                            </span> Manage Stations
                         </h3>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    <span></span>All Inventories <i
+                                    <span></span>All Stations <i
                                         class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
                                 </li>
                             </ul>
@@ -44,14 +44,16 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">All Inventories</h4>
+                                    <h4 class="card-title">All Stations</h4>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th> ID </th>
                                                     <th> Name </th>
-                                                    <th> Cost </th>
+                                                    <th> Email </th>
+                                                    <th> Phone Number </th>
+                                                    <th> Location </th>
                                                     <th>Description</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -59,15 +61,17 @@
                                             <tbody>
                                                 <?php
                                                 include '../db-conection.php';
-                                                $bookingplans = "SELECT * FROM `inventory`";
+                                                $bookingplans = "SELECT * FROM `stations`";
                                                 $querybookingsplans = mysqli_query($conn, $bookingplans);
                                                 $bookingsplansrows = mysqli_num_rows($querybookingsplans);
                                                 if ($bookingsplansrows >= 1) {
                                                     while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
-                                                        $id = $fetch['inventory_id'];
-                                                        $name = $fetch['inventory_item'];
-                                                        $cost = $fetch['inventory_cost'];
-                                                        $description = $fetch['inventory_description'];
+                                                        $id = $fetch['station_id'];
+                                                        $email = $fetch['station_email'];
+                                                        $name = $fetch['station_name'];
+                                                        $phone = $fetch['station_mobile'];
+                                                        $description = $fetch['station_desc'];
+                                                        $location = $fetch['station_location'];
 
 
                                                         echo "
@@ -75,14 +79,16 @@
                                                             <tr>
                                                                 <td>$id</td>
                                                                 <td>$name</td>
-                                                                <td>Ksh. $cost</td> 
+                                                                <td>$email</td> 
+                                                                <td>$phone</td> 
+                                                                <td>$location</td> 
                                                                 <td>$description</td> 
                                                                 <td>
-                                                                <a href='edit-inventory.php?inventory=$id'> <button   class='btn btn-outline-success btn-rounded btn-icon'>
+                                                                <a href='edit-station.php?station=$id'> <button   class='btn btn-outline-success btn-rounded btn-icon'>
                                                                 <i class='mdi mdi-bullseye'></i>
                                                               </button> </a>
                                                             
-                                                              <a href='delete-inventory.php?inventory=$id'> <button class='btn btn-outline-danger btn-rounded btn-icon'>
+                                                              <a href='delete-station.php?station=$id'> <button class='btn btn-outline-danger btn-rounded btn-icon'>
                                                                 <i class='mdi mdi-recycle'></i>
                                                               </button>
                                                               </a> 

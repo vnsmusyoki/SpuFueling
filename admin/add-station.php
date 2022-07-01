@@ -1,24 +1,5 @@
 <?php
-$tank_capacity = $tank_name = $message = '';
-?>
-<?php
-$tankid = $_GET['inventory'];
-include '../db-conection.php';
-$bookings = "SELECT * FROM `inventory` WHERE `inventory_id` = '$tankid'";
-$querybookings = mysqli_query($conn, $bookings);
-$bookingsrows = mysqli_num_rows($querybookings);
-if ($bookingsrows >= 1) {
-    while ($fetch  = mysqli_fetch_assoc($querybookings)) {
-        $globalid = $fetch['inventory_id'];
-        $globalname = $fetch['inventory_item'];
-        $globaldescription = $fetch['inventory_description'];
-        $globalcost = $fetch['inventory_cost'];
-    }
-    global $globalname;
-    global $globalcost;
-    global $globaldescription;
-    global $globalid;
-}
+$station_phone_number = $station_name = $station_location = $station_email = $description=  $message = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,12 +35,12 @@ if ($bookingsrows >= 1) {
                         <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-home"></i>
-                            </span> Edit Inventory
+                            </span> Add Station
                         </h3>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    <span></span>Updating Inventory <i
+                                    <span></span>Creating New Record <i
                                         class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
                                 </li>
                             </ul>
@@ -75,38 +56,49 @@ if ($bookingsrows >= 1) {
                                       <?php
 
                                         if (isset($_POST["createaccount"])) {
-                                            require 'functions/edit-inventory-validation.php';
+                                            require 'functions/add-station-validation.php';
                                         }
                                         ?>
                                         <?php echo $message; ?>
                                  
-                                        <div class=" row">
-                                        <div class="col-6">
+
+
+                                <div class=" row">
+                                        <div class="col-4">
                                             <div class="form-group">
-                                                <label for="exampleInputName1">Inventory Item</label>
+                                                <label for="exampleInputName1">Station Name</label>
                                                 <input type="text" class="form-control" id="exampleInputName1"
-                                                    placeholder="inventory names" name="inventory_name"
-                                                    value="<?php echo $globalname; ?>">
+                                                    placeholder="Station names" name="station_name">
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="form-group">
-                                                <label for="exampleInputName1">Inventory Cost</label>
-                                                <input type="number" min="1" class="form-control" id="exampleInputName1"
-                                                    placeholder="write the cost here" name="inventory_cost"
-                                                    value="<?php echo $globalcost; ?>">
+                                                <label for="exampleInputName1">Station Phone Number</label>
+                                                <input type="text" class="form-control" id="exampleInputName1"
+                                                    placeholder="Station phone Number" name="station_phone_number">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Station Email</label>
+                                                <input type="text" class="form-control" id="exampleInputName1"
+                                                    placeholder="write the email here" name="station_email">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Station Location</label>
+                                                <input type="text" class="form-control" id="exampleInputName1"
+                                                    placeholder="write the location here" name="station_location">
                                             </div>
                                         </div>
 
                                 </div>
-                                <input type="hidden" name="inventory_id" value="<?php echo $globalid; ?>">
-
                                 <div class="form-group">
-                                    <label for="exampleTextarea1">Inventory Description</label>
+                                    <label for="exampleTextarea1">Station Description</label>
                                     <textarea class="form-control" id="exampleTextarea1" rows="4"
-                                        name="description"><?php echo $globaldescription; ?></textarea>
+                                        name="description"></textarea>
                                 </div>
-
                                 <button type="submit" class="btn btn-gradient-primary mr-2"
                                     name="createaccount">Submit</button>
                                 <button class="btn btn-light" type="reset">Cancel</button>

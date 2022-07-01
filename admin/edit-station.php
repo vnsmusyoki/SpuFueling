@@ -1,5 +1,26 @@
 <?php
-$inventory_name = $inventory_cost =$description =  $message = '';
+$station_phone_number = $station_name = $station_location = $station_email = $description =  $message = '';
+?>
+<?php
+$station = $_GET['station'];
+include '../db-conection.php';
+$bookingplans = "SELECT * FROM `stations` WHERE `station_id` = '$station'";
+$querybookingsplans = mysqli_query($conn, $bookingplans);
+$bookingsplansrows = mysqli_num_rows($querybookingsplans);
+if ($bookingsplansrows >= 1) {
+    while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
+        $globalid = $fetch['station_id'];
+        $globalemail = $fetch['station_email'];
+        $globalname = $fetch['station_name'];
+        $globalphone = $fetch['station_mobile'];
+        $globaldescription = $fetch['station_desc'];
+        $globallocation = $fetch['station_location'];
+
+
+        global $globalid; global $globalemail; global $globalname; global $globalphone; global $globaldescription; global $globallocation;
+    }
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +56,7 @@ $inventory_name = $inventory_cost =$description =  $message = '';
                         <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-home"></i>
-                            </span> Add Inventory
+                            </span> Add Station
                         </h3>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
@@ -56,7 +77,7 @@ $inventory_name = $inventory_cost =$description =  $message = '';
                                       <?php
 
                                         if (isset($_POST["createaccount"])) {
-                                            require 'functions/add-inventory-validation.php';
+                                            require 'functions/edit-station-validation.php';
                                         }
                                         ?>
                                         <?php echo $message; ?>
@@ -64,29 +85,47 @@ $inventory_name = $inventory_cost =$description =  $message = '';
 
 
                                 <div class=" row">
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="form-group">
-                                                <label for="exampleInputName1">Inventory Item</label>
+                                                <label for="exampleInputName1">Station Name</label>
                                                 <input type="text" class="form-control" id="exampleInputName1"
-                                                    placeholder="inventory names" name="inventory_name">
+                                                    placeholder="Station names" value="<?php echo $globalname; ?>"
+                                                    name="station_name">
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="form-group">
-                                                <label for="exampleInputName1">Inventory Cost</label>
-                                                <input type="number" min="1" class="form-control" id="exampleInputName1"
-                                                    placeholder="write the cost here" name="inventory_cost">
+                                                <label for="exampleInputName1">Station Phone Number</label>
+                                                <input type="text" class="form-control" id="exampleInputName1"
+                                                    placeholder="Station phone Number"
+                                                    value="<?php echo $globalphone; ?>" name="station_phone_number">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Station Email</label>
+                                                <input type="text" class="form-control" id="exampleInputName1"
+                                                    placeholder="write the email here"
+                                                    value="<?php echo $globalemail; ?>" name="station_email">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="exampleInputName1">Station Location</label>
+                                                <input type="text" class="form-control" id="exampleInputName1"
+                                                    placeholder="write the location here"
+                                                    value="<?php echo $globallocation; ?>" name="station_location">
                                             </div>
                                         </div>
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleTextarea1">Inventory Description</label>
+                                    <label for="exampleTextarea1">Station Description</label>
                                     <textarea class="form-control" id="exampleTextarea1" rows="4"
-                                        name="description"></textarea>
+                                        name="description"><?php echo $globaldescription; ?></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-gradient-primary mr-2"
-                                    name="createaccount">Submit</button>
+                                <button type="submit" class="btn btn-gradient-primary mr-2" name="createaccount">Edit
+                                    Station</button>
                                 <button class="btn btn-light" type="reset">Cancel</button>
                                 </form>
                             </div>

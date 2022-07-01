@@ -57,15 +57,15 @@
          <li class="nav-item">
              <a class="nav-link" data-toggle="collapse" href="#ui-basic-invent" aria-expanded="false"
                  aria-controls="ui-basic-invent">
-                 <span class="menu-title">Inventory</span>
+                 <span class="menu-title">Stations</span>
                  <i class="menu-arrow"></i>
                  <i class="mdi mdi-format-list-bulleted"></i>
              </a>
              <div class="collapse" id="ui-basic-invent">
                  <ul class="nav flex-column sub-menu">
-                     <li class="nav-item"> <a class="nav-link" href="add-inventory.php">Add new
-                             Inventory</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="manage-employees.php">Manage
+                     <li class="nav-item"> <a class="nav-link" href="add-station.php">Add new
+                             Station</a></li>
+                     <li class="nav-item"> <a class="nav-link" href="manage-stations.php">Manage
                              Inventories</a>
                      </li>
                  </ul>

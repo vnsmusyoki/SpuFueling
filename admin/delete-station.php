@@ -6,9 +6,9 @@ include '../db-conection.php';
 // } else {
 //     $loggedinmember = $_SESSION['admin'];
 // }
-$dietcheck = $_GET['inventory'];
-$checkproduct = "DELETE  FROM `inventory` WHERE `inventory_id` = '$dietcheck'";
+$dietcheck = $_GET['station'];
+$checkproduct = "DELETE  FROM `stations` WHERE `station_id` = '$dietcheck'";
 $querycheckproduct = mysqli_query($conn, $checkproduct);
 if ($querycheckproduct) {
-    echo "<script>window.location.replace('manage-inventories.php');</script>";
+    echo "<script>window.location.replace('manage-stations.php');</script>";
 }
