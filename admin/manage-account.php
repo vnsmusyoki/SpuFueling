@@ -1,4 +1,6 @@
 <?php
+require'admin-account.php';
+?><?php
 $tank_capacity = $tank_name = $message ='';
 ?>
 <!DOCTYPE html>

@@ -1,4 +1,6 @@
 <?php
+require'admin-account.php';
+?><?php
 $firstname = $othernames = $message = $email_address = $id_number = $phone_number = $net_salary = $residence = $next_of_kin_full_name = $kin_phone_number = $username = $password = '';
 ?>
 <!DOCTYPE html>

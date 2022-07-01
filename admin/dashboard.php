@@ -1,34 +1,5 @@
 <?php
-session_start();
-if (!isset($_SESSION['admin'])) {
-    header('Location: ../login.php');
-} else {
-    include '../db-conection.php';
-    $email = $_SESSION['admin'];
-    $checkemail = "SELECT *  FROM `login` WHERE `login_username`= '$email' ";
-    $queryemail = mysqli_query($conn, $checkemail);
-    $checkemailrows = mysqli_num_rows($queryemail);
-    if ($checkemailrows >= 1) {
-        while ($fetch = mysqli_fetch_assoc($queryemail)) {
-            $globalusername = $fetch['login_username'];
-            $globalloggedinid = $fetch['login_id'];
-            $memberid = $fetch['login_admin'];
-            global $memberid;
-            $checkclient = "SELECT *  FROM `admin` WHERE `admin_id`= '$memberid'";
-            $queryemail = mysqli_query($conn, $checkclient);
-            $checkclientrows = mysqli_num_rows($queryemail);
-            if ($checkclientrows >= 1) {
-                while ($fetchclient = mysqli_fetch_assoc($queryemail)) {
-                    $globalmembername = $fetchclient['admin_full_names'];
-                }
-            }
-
-            global $globalmembername;
-            global $memberid;
-            global $globalloggedinid;
-        }
-    }
-}
+require'admin-account.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,9 +101,9 @@ if (!isset($_SESSION['admin'])) {
                                     $bookingplans = "SELECT * FROM `suppliers`";
                                     $querybookingsplans = mysqli_query($conn, $bookingplans);
                                     $bookingsplansrows = mysqli_num_rows($querybookingsplans);
-                                   
+
                                     echo "<h2 class='mb-5'>$bookingsplansrows</h2>";
-                                    
+
                                     ?>
                                     <h6 class="card-text">Increased by 5%</h6>
                                 </div>

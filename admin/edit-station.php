@@ -1,4 +1,6 @@
 <?php
+require'admin-account.php';
+?><?php
 $station_phone_number = $station_name = $station_location = $station_email = $description =  $message = '';
 ?>
 <?php

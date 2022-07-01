@@ -1,4 +1,6 @@
 <?php
+require'admin-account.php';
+?><?php
 $supplier_id = $tank_id = $message = $cost = $capacity =  $comments = '';
 ?>
 <?php

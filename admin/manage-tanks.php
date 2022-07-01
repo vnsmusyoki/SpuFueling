@@ -1,3 +1,6 @@
+<?php
+require'admin-account.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 

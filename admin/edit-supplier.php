@@ -1,4 +1,6 @@
 <?php
+require'admin-account.php';
+?><?php
 $fullname = $company = $message = $email_address = $phone_number = '';
 ?>
 <?php

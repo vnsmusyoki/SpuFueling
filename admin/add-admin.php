@@ -1,6 +1,9 @@
 <?php
+require'admin-account.php';
+?><?php
 $station_id = $fullname = $message = $email = $phonenumber =  $residence  = $username = $password = '';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
