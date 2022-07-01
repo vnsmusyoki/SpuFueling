@@ -37,7 +37,7 @@ require 'admin-account.php';
                         <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-home"></i>
-                            </span> Manage Account
+                            </span> Manage Account Username
                         </h3>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
@@ -52,44 +52,47 @@ require 'admin-account.php';
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Updating Account Password</h4>
+                                    <h4 class="card-title">Updating Account Username</h4>
 
                                     <form class="forms-sample" action="" method="POST" autocomplete="off" ">
                                       <?php
 
                                         if (isset($_POST["createaccount"])) {
-                                            $password = mysqli_real_escape_string($conn, $_POST['password']);
-                                            $cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+                                            $username = mysqli_real_escape_string($conn, $_POST['username']);
                                             $passlength = strlen($password);
-                                            if (empty($cpassword) || empty($password)) {
+                                            if (empty($cpassword)) {
                                                 $message = "
                                         <script>
-                                            toastr.error('Please Provide all the details to update password');
+                                            toastr.error('Please Provide the  username');
                                         </script>
                                     ";
-                                            } else if ($passlength < 6) {
+                                            } else if (!preg_match("/^[a-zA-z0-9 ]*$/", $username)) {
                                                 $message = "
-                                    <script>
-                                        toastr.error('Password should have atleast 6 characters');
-                                    </script>
-                                ";
-                                            } else if ($password !== $cpassword) {
-                                                $message = "
-                                    <script>
-                                        toastr.error('Password failed to match');
-                                    </script>
-                                ";
+                                            <script>
+                                            toastr.error('Username format is incorrect');
+                                            </script>
+                                            ";
                                             } else {
-                                                $newpass = md5($password);
 
-                                                $update = "UPDATE `login` SET `login_password` = '$newpass' WHERE `login_id` = '$globalloggedinid'";
-                                                $queryupdate = mysqli_query($conn, $update);
-                                                if ($queryupdate) {
+                                                $checkusername = "SELECT * FROM `login` WHERE `login_username` = '$username'";
+                                                $queryusername = mysqli_query($conn, $checkusername);
+                                                $checkusernamerows = mysqli_num_rows($queryusername);
+                                                if ($checkusernamerows >= 1) {
                                                     $message = "
                                         <script>
-                                            toastr.success('Password has been updated successfully');
+                                        toastr.error('Username already exists. Please confirm your new username  again .');
+                                        </script>";
+                                                } else {
+
+                                                    $update = "UPDATE `login` SET `login_username` = '$newpass' WHERE `login_id` = '$globalloggedinid'";
+                                                    $queryupdate = mysqli_query($conn, $update);
+                                                    if ($queryupdate) {
+                                                        $message = "
+                                        <script>
+                                            toastr.success('username has been updated successfully');
                                         </script>
                                     ";
+                                                    }
                                                 }
                                             }
                                         }
@@ -99,25 +102,19 @@ require 'admin-account.php';
 
 
                                 <div class=" row">
-                                        <div class="col-6">
+                                        <div class="col-12">
                                             <div class="form-group">
-                                                <label for="exampleInputName1">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputName1"
-                                                    placeholder="******" name="password">
+                                                <label for="exampleInputName1">Username</label>
+                                                <input type="text" class="form-control" id="exampleInputName1"
+                                                    placeholder="eg. johndoeadmin" name="username">
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="exampleInputName1">Confirm Password</label>
-                                                <input type="password" class="form-control" id="exampleInputName1"
-                                                    placeholder="**********" name="cpassword">
-                                            </div>
-                                        </div>
+
 
                                 </div>
 
                                 <button type="submit" class="btn btn-gradient-primary mr-2" name="createaccount">Update
-                                    Password</button>
+                                    Username</button>
                                 </form>
                             </div>
                         </div>

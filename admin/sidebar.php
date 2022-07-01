@@ -124,6 +124,12 @@
              </a>
          </li>
          <li class="nav-item">
+             <a class="nav-link" href="manage-username.php">
+                 <span class="menu-title">Update Username</span>
+                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+             </a>
+         </li>
+         <li class="nav-item">
              <a class="nav-link" href="logout.php">
                  <span class="menu-title">Log Out</span>
                  <i class="mdi mdi-format-list-bulleted menu-icon"></i>
