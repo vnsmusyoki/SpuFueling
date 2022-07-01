@@ -1,3 +1,35 @@
+<?php
+session_start();
+if (!isset($_SESSION['admin'])) {
+    header('Location: ../login.php');
+} else {
+    include '../db-conection.php';
+    $email = $_SESSION['admin'];
+    $checkemail = "SELECT *  FROM `login` WHERE `login_username`= '$email' ";
+    $queryemail = mysqli_query($conn, $checkemail);
+    $checkemailrows = mysqli_num_rows($queryemail);
+    if ($checkemailrows >= 1) {
+        while ($fetch = mysqli_fetch_assoc($queryemail)) {
+            $globalusername = $fetch['login_username'];
+            $globalloggedinid = $fetch['login_id'];
+            $memberid = $fetch['login_admin'];
+            global $memberid;
+            $checkclient = "SELECT *  FROM `admin` WHERE `admin_id`= '$memberid'";
+            $queryemail = mysqli_query($conn, $checkclient);
+            $checkclientrows = mysqli_num_rows($queryemail);
+            if ($checkclientrows >= 1) {
+                while ($fetchclient = mysqli_fetch_assoc($queryemail)) {
+                    $globalmembername = $fetchclient['admin_full_names'];
+                }
+            }
+
+            global $globalmembername;
+            global $memberid;
+            global $globalloggedinid;
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +45,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 </head>
 
 <body>
@@ -44,10 +78,28 @@
                                 <div class="card-body">
                                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
                                         alt="circle-image" />
-                                    <h4 class="font-weight-normal mb-3">Weekly Sales <i
+                                    <h4 class="font-weight-normal mb-3">Total Supplies <i
                                             class="mdi mdi-chart-line mdi-24px float-right"></i>
                                     </h4>
-                                    <h2 class="mb-5">$ 15,0000</h2>
+                                    <?php
+                                    include '../db-conection.php';
+                                    $bookingplans = "SELECT * FROM `supplies`";
+                                    $querybookingsplans = mysqli_query($conn, $bookingplans);
+                                    $bookingsplansrows = mysqli_num_rows($querybookingsplans);
+                                    if ($bookingsplansrows >= 1) {
+                                        $totalcost = 0;
+                                        $supplycapacity = 0;
+                                        while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
+                                            $cost = $fetch['supply_total_cost'];
+                                            $suppliedcapacity = $fetch['supply_capacity'];
+                                            $totalcost = $totalcost + $cost;
+                                            $supplycapacity = $supplycapacity + $suppliedcapacity;
+
+                                            echo "<h2 class='mb-5'>Ksh. $totalcost</h2>";
+                                        }
+                                        global $supplycapacity;
+                                    }
+                                    ?>
                                     <h6 class="card-text">Increased by 60%</h6>
                                 </div>
                             </div>
@@ -57,10 +109,10 @@
                                 <div class="card-body">
                                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
                                         alt="circle-image" />
-                                    <h4 class="font-weight-normal mb-3">Weekly Orders <i
+                                    <h4 class="font-weight-normal mb-3">Supplied Capacity <i
                                             class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                                     </h4>
-                                    <h2 class="mb-5">45,6334</h2>
+                                    <h2 class="mb-5"><?php echo $supplycapacity; ?> Litres</h2>
                                     <h6 class="card-text">Decreased by 10%</h6>
                                 </div>
                             </div>
@@ -70,10 +122,18 @@
                                 <div class="card-body">
                                     <img src="assets/images/dashboard/circle.svg" class="card-img-absolute"
                                         alt="circle-image" />
-                                    <h4 class="font-weight-normal mb-3">Visitors Online <i
+                                    <h4 class="font-weight-normal mb-3">Total Suppliers <i
                                             class="mdi mdi-diamond mdi-24px float-right"></i>
                                     </h4>
-                                    <h2 class="mb-5">95,5741</h2>
+                                    <?php
+                                    include '../db-conection.php';
+                                    $bookingplans = "SELECT * FROM `suppliers`";
+                                    $querybookingsplans = mysqli_query($conn, $bookingplans);
+                                    $bookingsplansrows = mysqli_num_rows($querybookingsplans);
+                                   
+                                    echo "<h2 class='mb-5'>$bookingsplansrows</h2>";
+                                    
+                                    ?>
                                     <h6 class="card-text">Increased by 5%</h6>
                                 </div>
                             </div>
@@ -84,67 +144,77 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Recent Tickets</h4>
+                                    <h4 class="card-title">All Supplies</h4>
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <!-- <table class="table"> -->
+                                        <table id="example" class="display" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th> Assignee </th>
-                                                    <th> Subject </th>
-                                                    <th> Status </th>
-                                                    <th> Last Update </th>
-                                                    <th> Tracking ID </th>
+                                                    <th> ID </th>
+                                                    <th> Supplier Name </th>
+                                                    <th> Capacity Supplied </th>
+                                                    <th> Total Cost </th>
+                                                    <th> Tank Supplied </th>
+                                                    <th>Date Supplier</th>
+                                                    <th>Comments</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <img src="assets/images/faces/face1.jpg" class="mr-2"
-                                                            alt="image"> David Grey
-                                                    </td>
-                                                    <td> Fund is not recieved </td>
-                                                    <td>
-                                                        <label class="badge badge-gradient-success">DONE</label>
-                                                    </td>
-                                                    <td> Dec 5, 2017 </td>
-                                                    <td> WD-12345 </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="assets/images/faces/face2.jpg" class="mr-2"
-                                                            alt="image"> Stella Johnson
-                                                    </td>
-                                                    <td> High loading time </td>
-                                                    <td>
-                                                        <label class="badge badge-gradient-warning">PROGRESS</label>
-                                                    </td>
-                                                    <td> Dec 12, 2017 </td>
-                                                    <td> WD-12346 </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="assets/images/faces/face3.jpg" class="mr-2"
-                                                            alt="image"> Marina Michel
-                                                    </td>
-                                                    <td> Website down for one week </td>
-                                                    <td>
-                                                        <label class="badge badge-gradient-info">ON HOLD</label>
-                                                    </td>
-                                                    <td> Dec 16, 2017 </td>
-                                                    <td> WD-12347 </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <img src="assets/images/faces/face4.jpg" class="mr-2"
-                                                            alt="image"> John Doe
-                                                    </td>
-                                                    <td> Loosing control on server </td>
-                                                    <td>
-                                                        <label class="badge badge-gradient-danger">REJECTED</label>
-                                                    </td>
-                                                    <td> Dec 3, 2017 </td>
-                                                    <td> WD-12348 </td>
-                                                </tr>
+                                                <?php
+                                                include '../db-conection.php';
+                                                $bookingplans = "SELECT * FROM `supplies`";
+                                                $querybookingsplans = mysqli_query($conn, $bookingplans);
+                                                $bookingsplansrows = mysqli_num_rows($querybookingsplans);
+                                                if ($bookingsplansrows >= 1) {
+                                                    while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
+                                                        $id = $fetch['supply_id'];
+                                                        $supplierid = $fetch['supply_supplier_id'];
+                                                        $capacity = $fetch['supply_capacity'];
+                                                        $tankid = $fetch['supply_fuel_tank_id'];
+                                                        $cost = $fetch['supply_total_cost'];
+                                                        $date = $fetch['supply_date'];
+                                                        $comments = $fetch['supply_comments'];
+                                                        $checktank = "SELECT * FROM `fuel_tank` WHERE `fuel_tank_id` = '$tankid'";
+                                                        $querytank = mysqli_query($conn, $checktank);
+                                                        $fetchtank = mysqli_num_rows($querytank);
+                                                        if ($fetchtank > 0) {
+                                                            while ($fetchtank = mysqli_fetch_assoc($querytank)) {
+                                                                $tankname = $fetchtank['fuel_tank_name'];
+                                                            }
+                                                        }
+
+                                                        $checksupplier = "SELECT * FROM `suppliers` WHERE `supplier_id` = '$supplierid'";
+                                                        $querysupplier = mysqli_query($conn, $checksupplier);
+                                                        $fetchsupplier = mysqli_num_rows($querysupplier);
+                                                        if ($fetchsupplier > 0) {
+                                                            while ($fetchtank = mysqli_fetch_assoc($querysupplier)) {
+                                                                $suppliername = $fetchtank['supplier_name'];
+                                                            }
+                                                        }
+                                                        echo "
+                                                    
+                                                            <tr>
+                                                                <td>$id</td>
+                                                                <td>$suppliername</td>
+                                                                <td>$capacity</td> 
+                                                                <td>$cost</td> 
+                                                                <td>$tankname</td> 
+                                                                <td>$date</td> 
+                                                                <td>$comments</td> 
+                                                             
+                                                                
+                                                                 
+                                                                
+                                
+                                </tr>";
+                                                    }
+                                                }
+
+                                                ?>
+
+
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -187,6 +257,20 @@
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/todolist.js"></script>
     <!-- End custom js for this page -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 </body>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'print'
+        ]
+    });
+});
+</script>
 
 </html>
