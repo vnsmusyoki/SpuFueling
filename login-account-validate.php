@@ -29,7 +29,7 @@ if (empty($username) || empty($password)) {
                 if ($category == "employee") {
                    
                     $_SESSION['employee'] = $username;
-                    echo "<script>window.location.replace('dashboards/instructor/dashboard.php');</script>";
+                    echo "<script>window.location.replace('employee/dashboard.php');</script>";
                 }else {
                      
                     $_SESSION['admin'] = $username;
