@@ -39,11 +39,10 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 wow fadeInLeft" data-wow-delay="0.3s">
                     <div class="solar_about_detail">
-                        <h5 class="solar_center solar_left">Solar Energy</h5>
-                        <h1 class="text_span">we write about natural energy</h1>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a
-                            page when looking at its layout.</p>
-                        <img src="assets/images/solar_ss.png" alt="solar-installation-about" />
+                        <p>one of robust demographic trends driving dynamic and sustained growth, in a continent on the
+                            move. Our business brings together the power of one of the world’s great brands and the
+                            flexibility of a vibrant</p>
+                        <img src="assets/images/petrol-3.jpg" alt="solar-installation-about" />
                         <a href="index.php" class="solar_btn">Read More</a>
                     </div>
                 </div>
@@ -52,30 +51,33 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="solar_about_sources solar_about_mt01">
-                                    <img src="assets/images/solar-icon5.png" alt="solar-installation-about-energy1" />
-                                    <h5>The Power house</h5>
-                                    <p>It is a long established fact that a reader will be distracted</p>
+                                    <img src="assets/images/petrol-4.jpg" alt="solar-installation-about-energy1" />
+                                    <h5>Excelent services</h5>
+                                    <p> mark of quality and our promise to deliver excellence to each and every one of
+                                        our customers. </p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="solar_about_sources solar_about_mt02">
-                                    <img src="assets/images/solar-icon6.png" alt="solar-installation-about-energy2" />
-                                    <h5>The Green house</h5>
-                                    <p>It is a long established fact that a reader will be distracted</p>
+                                    <img src="assets/images/petrol-5.jpg" alt="solar-installation-about-energy2" />
+                                    <h5>Our Aim</h5>
+                                    <p>our aim is to make sure that your experience goes beyond just fueling.</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="solar_about_sources solar_about_mt03">
-                                    <img src="assets/images/solar-icon7.png" alt="solar-installation-about-energy3" />
-                                    <h5>Solar Ventilation</h5>
-                                    <p>It is a long established fact that a reader will be distracted</p>
+                                    <img src="assets/images/petrol-6.jpg" alt="solar-installation-about-energy3" />
+                                    <h5>Drivers</h5>
+                                    <p>If driving matters to you, our specially-formulated fuel and lubricants will help
+                                        ensure your vehicle performs at its best.</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="solar_about_sources solar_about_mt04">
-                                    <img src="assets/images/solar-icon8.png" alt="solar-installation-about-energy4" />
-                                    <h5>Solar Panels</h5>
-                                    <p>It is a long established fact that a reader will be distracted</p>
+                                    <img src="assets/images/petrol-3.jpg" alt="solar-installation-about-energy4" />
+                                    <h5>Customer policy</h5>
+                                    <p>we make our customers’ lives easier and their experience with us more convenient,
+                                        enjoyable and rewarding.</p>
                                 </div>
                             </div>
                         </div>
@@ -95,12 +97,9 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12">
                         <div class="solar_footer_ab">
-                            <a href="index.html"><img src="assets/images/white_logo.svg"
-                                    alt="solar-installation-footer-logo" /></a>
-                            <p>It is a long established fact that a reader will be distracted by the readable content of
-                                a page when looking at its layout. The point of using Lorem Ipsum is that it has a
-                                more-or-less normal distribution of letters, as opposed
-                                to using.</p>
+                            <p>one of robust demographic trends driving dynamic and sustained growth, in a continent on
+                                the move. Our business brings together the power of one of the world’s great brands and
+                                the flexibility of a vibrant</p>
                             <div class="top_solar_btn">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -135,14 +134,13 @@
                             <h3>contact us</h3>
                             <div class="solar_information">
                                 <ul>
-                                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> Los Angeles Gournadi, 1230
-                                        Bariasl</li>
-                                    <li><i class="fa fa-globe" aria-hidden="true"></i> www.solarinstallation.com</li>
-                                    <li><i class="fa fa-envelope" aria-hidden="true"></i> mail@example.com</li>
+                                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> Limuru Street, Limuru</li>
+                                    <li><i class="fa fa-globe" aria-hidden="true"></i> www.fuelingsystem.com</li>
+                                    <li><i class="fa fa-envelope" aria-hidden="true"></i> shawnmugalla@gmail.com</li>
                                 </ul>
                             </div>
                             <p>Call Now</p>
-                            <h1>0789 6457 351</h1>
+                            <h1>0721525649</h1>
                         </div>
                     </div>
                 </div>
