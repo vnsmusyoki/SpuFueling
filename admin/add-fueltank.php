@@ -37,7 +37,7 @@ $tank_capacity = $tank_name = $message ='';
                         <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-home"></i>
-                            </span> Add Employee
+                            </span> Add Fuel Tanks
                         </h3>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
@@ -70,7 +70,7 @@ $tank_capacity = $tank_name = $message ='';
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Tank Name</label>
                                                 <input type="text" class="form-control" id="exampleInputName1"
-                                                    placeholder="Kin FUll names" name="tank_name">
+                                                    placeholder="Add Fuel Tank Name" name="tank_name">
                                             </div>
                                         </div>
                                         <div class="col-6">

@@ -44,7 +44,7 @@
                         <p>It is a long established fact that a reader will be distracted by the readable content of a
                             page when looking at its layout.</p>
                         <img src="assets/images/solar_ss.png" alt="solar-installation-about" />
-                        <a href="about.html" class="solar_btn">Read More</a>
+                        <a href="index.php" class="solar_btn">Read More</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 wow fadeInRight" data-wow-delay="0.3s">
