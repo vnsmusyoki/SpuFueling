@@ -37,7 +37,7 @@ $supplier_id = $tank_id = $message = $cost = $capacity =  $comments = '';
                         <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-home"></i>
-                            </span> Add Supplier
+                            </span> Add New Supply Record
                         </h3>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
@@ -113,18 +113,19 @@ $supplier_id = $tank_id = $message = $cost = $capacity =  $comments = '';
                                         </div>
                                         <div class="col-3">
                                             <div class="form-group">
+                                                <label for="exampleInputName1">Capacity</label>
+                                                <input type="number" class="form-control" id="exampleInputName1"
+                                                    placeholder="eg. 70000 liters" name="capacity">
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="form-group">
                                                 <label for="exampleInputName1">Cost</label>
                                                 <input type="number" class="form-control" id="exampleInputName1"
                                                     placeholder="eg. 70000" name="cost">
                                             </div>
                                         </div>
-                                        <div class="col-3">
-                                            <div class="form-group">
-                                                <label for="exampleInputName1">Capacity</label>
-                                                <input type="number" class="form-control" id="exampleInputName1"
-                                                    placeholder="eg. 70000" name="capacity">
-                                            </div>
-                                        </div>
+
 
                                 </div>
                                 <div class="form-group">

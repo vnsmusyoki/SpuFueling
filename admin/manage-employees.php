@@ -93,15 +93,15 @@ require'admin-account.php';
                                                                 <td>$kinname</td>
                                                                 <td>$kinnumber</td>
                                                                 <td>
-                                                                <button type='button' class='btn btn-outline-success btn-rounded btn-icon'>
+                                                                <a href='view-employee.php?id=$inid' class='btn btn-outline-success btn-rounded btn-icon'>
                                                                 <i class='mdi mdi-bullseye'></i>
-                                                              </button> 
-                                                              <button type='button' class='btn btn-outline-warning btn-rounded btn-icon'>
+                                                              </a> 
+                                                              <a href='edit-employee.php?id=$inid' class='btn btn-outline-warning btn-rounded btn-icon'>
                                                                 <i class='mdi mdi-grease-pencil'></i>
-                                                              </button>
-                                                              <button type='button' class='btn btn-outline-danger btn-rounded btn-icon'>
+                                                              </a>
+                                                              <a href='delete-employee.php?id=$inid' class='btn btn-outline-danger btn-rounded btn-icon'>
                                                                 <i class='mdi mdi-recycle'></i>
-                                                              </button>
+                                                              </a>
                                                                 </td>
                                                                 
                                                                  

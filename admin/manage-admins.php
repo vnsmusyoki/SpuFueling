@@ -49,7 +49,7 @@ require'admin-account.php';
                                 <div class="card-body">
                                     <h4 class="card-title">All Admin</h4>
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th> Full Name </th>
@@ -62,11 +62,12 @@ require'admin-account.php';
                                             <tbody>
                                                 <?php
                                                 include '../db-conection.php';
-                                                $bookingplans = "SELECT * FROM `admin`";
-                                                $querybookingsplans = mysqli_query($conn, $bookingplans);
-                                                $bookingsplansrows = mysqli_num_rows($querybookingsplans);
+                                                $checkadmins = "SELECT * FROM `admin`";
+                                                $query = mysqli_query($conn, $checkadmins);
+                                              $bookingsplansrows = mysqli_num_rows($query);
+                                                
                                                 if ($bookingsplansrows >= 1) {
-                                                    while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
+                                                    while ($fetch  = mysqli_fetch_assoc($query)) {
                                                         $inid = $fetch['admin_id'];
                                                         $fullname = $fetch['admin_full_names'];
                                                         $phonenumber = $fetch['admin_phone_number'];
@@ -74,11 +75,11 @@ require'admin-account.php';
                                                         $residence = $fetch['admin_residence'];
                                                         $stationid = $fetch['admin_station_id'];
 
-                                                        $bookingplans = "SELECT * FROM `stations` WHERE `station_id` = '$stationid'";
-                                                        $querybookingsplans = mysqli_query($conn, $bookingplans);
-                                                        $bookingsplansrows = mysqli_num_rows($querybookingsplans);
-                                                        if ($bookingsplansrows >= 1) {
-                                                            while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
+                                                   $checkstations = "SELECT * FROM `stations` WHERE `station_id` = '$stationid'";
+                                                        $querys = mysqli_query($conn, $checkstations);
+                                                        $checkstationsrows = mysqli_num_rows($querys);
+                                                        if ($checkstationsrows >= 1) {
+                                                            while ($fetch  = mysqli_fetch_assoc($querys)) {
                                                                 $stationname = $fetch['station_name'];
                                                             }}
                                                         echo "
@@ -94,12 +95,11 @@ require'admin-account.php';
                                                                  
                                                                 
                                 
-                                </tr>";
+                                                          </tr>";
                                                     }
                                                 }
 
                                                 ?>
-
 
 
                                             </tbody>

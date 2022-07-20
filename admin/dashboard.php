@@ -66,12 +66,11 @@ require'admin-account.php';
                                             $totalcost = $totalcost + $cost;
                                             $supplycapacity = $supplycapacity + $suppliedcapacity;
 
-                                            echo "<h2 class='mb-5'>Ksh. $totalcost</h2>";
+                                           
                                         }
-                                        global $supplycapacity;
-                                    }
+                                        
+                                    } echo "<h2 class='mb-5'>Ksh. $totalcost</h2>";
                                     ?>
-                                    <h6 class="card-text">Increased by 60%</h6>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +83,6 @@ require'admin-account.php';
                                             class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                                     </h4>
                                     <h2 class="mb-5"><?php echo $supplycapacity; ?> Litres</h2>
-                                    <h6 class="card-text">Decreased by 10%</h6>
                                 </div>
                             </div>
                         </div>
@@ -102,10 +100,9 @@ require'admin-account.php';
                                     $querybookingsplans = mysqli_query($conn, $bookingplans);
                                     $bookingsplansrows = mysqli_num_rows($querybookingsplans);
 
-                                    echo "<h2 class='mb-5'>$bookingsplansrows</h2>";
+                                    echo "<h2 class='mb-5'>$bookingsplansrows suppliers</h2>";
 
                                     ?>
-                                    <h6 class="card-text">Increased by 5%</h6>
                                 </div>
                             </div>
                         </div>

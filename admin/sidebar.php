@@ -48,8 +48,10 @@
                  <ul class="nav flex-column sub-menu">
                      <li class="nav-item"> <a class="nav-link" href="add-fueltank.php">Add new
                              Fuel Tank</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="manage-employees.php">Manage
-                             Employees</a>
+                     <li class="nav-item"> <a class="nav-link" href="manage-tanks.php">Manage
+                             Fuel Tanks</a>
+                     </li>
+                     <li class="nav-item"> <a class="nav-link" href="print-manage-tanks.php">Generate Report</a>
                      </li>
                  </ul>
              </div>
@@ -66,7 +68,10 @@
                      <li class="nav-item"> <a class="nav-link" href="add-station.php">Add new
                              Station</a></li>
                      <li class="nav-item"> <a class="nav-link" href="manage-stations.php">Manage
-                             Inventories</a>
+                             Stations</a>
+                     </li>
+                     <li class="nav-item"> <a class="nav-link" href="print-stations.php">Print
+                             Stations</a>
                      </li>
                  </ul>
              </div>
@@ -85,6 +90,9 @@
                      <li class="nav-item"> <a class="nav-link" href="manage-suppliers.php">Manage
                              Suppliers</a>
                      </li>
+                     <li class="nav-item"> <a class="nav-link" href="print-suppliers.php">Print
+                             Suppliers</a>
+                     </li>
                  </ul>
              </div>
          </li>
@@ -100,7 +108,10 @@
                      <li class="nav-item"> <a class="nav-link" href="add-supply.php">Add new
                              Supply</a></li>
                      <li class="nav-item"> <a class="nav-link" href="manage-employees.php">Manage
-                             Drivers</a>
+                             Supplies</a>
+                     </li>
+                     <li class="nav-item"> <a class="nav-link" href="print-supplies.php">Print
+                             Supplies</a>
                      </li>
                  </ul>
              </div>
@@ -114,6 +125,12 @@
          <li class="nav-item">
              <a class="nav-link" href="manage-admins.php">
                  <span class="menu-title">Manage Admins</span>
+                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+             </a>
+         </li>
+         <li class="nav-item">
+             <a class="nav-link" href="print-admins.php">
+                 <span class="menu-title">Print Admin List</span>
                  <i class="mdi mdi-format-list-bulleted menu-icon"></i>
              </a>
          </li>

@@ -20,7 +20,7 @@ if (
 toastr.error('Please Provide all the details');
 </script>
 ";
-} else if (!preg_match("/^[a-zA-Z ]*$/", $fullname) || !preg_match("/^[a-zA-z ]*$/", $othernames) || !preg_match("/^[a-zA-z ]*$/", $kinfullname)) {
+} else if (!preg_match("/^[a-zA-Z ]*$/", $fullname)) {
     $message = "
 <script>
 toastr.error('Provided an invalid names characters');

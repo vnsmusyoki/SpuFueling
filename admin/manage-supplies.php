@@ -109,7 +109,7 @@ require'admin-account.php';
                                                                 <i class='mdi mdi-bullseye'></i>
                                                               </button> </a>
                                                             
-                                                              <a href='delete-supply.php?supplier=$id'> <button class='btn btn-outline-danger btn-rounded btn-icon'>
+                                                              <a href='delete-supply.php?supply=$id'> <button class='btn btn-outline-danger btn-rounded btn-icon'>
                                                                 <i class='mdi mdi-recycle'></i>
                                                               </button>
                                                               </a> 

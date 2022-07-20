@@ -24,8 +24,6 @@
     <link rel="stylesheet" type="text/css" href="assets/csss/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <!-- Put external stylesheet here -->
-
-
     <!-- stylesheet end -->
 </head>
 
