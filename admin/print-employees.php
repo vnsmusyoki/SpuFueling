@@ -8,7 +8,7 @@ require'admin-account.php';
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title> Admin Dashboard</title>
+    <title> Employees</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
@@ -16,6 +16,8 @@ require'admin-account.php';
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="assets/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
 </head>
 
 <body>
@@ -30,12 +32,12 @@ require'admin-account.php';
                         <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-home"></i>
-                            </span> Manage Employees
+                            </span> Generate Employees Report
                         </h3>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item active" aria-current="page">
-                                    <span></span>All Employed <i
+                                    <span></span>All Employees <i
                                         class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
                                 </li>
                             </ul>
@@ -47,19 +49,19 @@ require'admin-account.php';
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">All employees</h4>
+                                    <h4 class="card-title">All Stations</h4>
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table table-bordered" id="example">
                                             <thead>
                                                 <tr>
                                                     <th> Full Name </th>
                                                     <th> Email Address </th>
                                                     <th> Phone Number </th>
                                                     <th> ID Number </th>
-                                                    <th> Station </th>
+                                                    <th> Station Name </th>
                                                     <th>Kin Names</th>
                                                     <th>Kin Phone Number</th>
-                                                    <th>Action</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -80,7 +82,7 @@ require'admin-account.php';
                                                         $kinnumber = $fetch['employee_next_of_kin_phone_number'];
                                                         $phonenumber = $fetch['employee_phone_number'];
                                                         $station_id = $fetch['employee_station_id'];
-                                                     $bookingplans = "SELECT * FROM `stations` WHERE `station_id` = '$station_id'";
+                                                        $bookingplans = "SELECT * FROM `stations` WHERE `station_id` = '$station_id'";
                                                         $querybookingsplans = mysqli_query($conn, $bookingplans);
                                                         $bookingsplansrows = mysqli_num_rows($querybookingsplans);
                                                         if ($bookingsplansrows >= 1) {
@@ -98,18 +100,10 @@ require'admin-account.php';
                                                                 <td>$station_name</td>
                                                                 <td>$kinname</td>
                                                                 <td>$kinnumber</td>
-                                                                <td>
-                                                                <a href='view-employee.php?id=$inid' class='btn btn-outline-success btn-rounded btn-icon'>
-                                                                <i class='mdi mdi-bullseye'></i>
-                                                              </a> 
-                                                              <a href='edit-employee.php?id=$inid' class='btn btn-outline-warning btn-rounded btn-icon'>
-                                                                <i class='mdi mdi-grease-pencil'></i>
-                                                              </a>
-                                                              <a href='delete-employee.php?id=$inid' class='btn btn-outline-danger btn-rounded btn-icon'>
-                                                                <i class='mdi mdi-recycle'></i>
-                                                              </a>
-                                                                </td>                            
-                                            
+                                                              
+                                                                 
+                                                                
+                                
                                 </tr>";
                                                     }
                                                 }
@@ -160,6 +154,20 @@ require'admin-account.php';
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/todolist.js"></script>
     <!-- End custom js for this page -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 </body>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'print'
+        ]
+    });
+});
+</script>
 
 </html>

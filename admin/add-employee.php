@@ -1,7 +1,7 @@
 <?php
 require'admin-account.php';
 ?><?php
-$firstname = $othernames = $message = $email_address = $id_number = $phone_number = $net_salary = $residence = $next_of_kin_full_name = $kin_phone_number = $username = $password = '';
+$firstname = $othernames = $message = $email_address = $id_number = $phone_number = $station_name = $residence = $next_of_kin_full_name = $kin_phone_number = $username = $password = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -103,9 +103,27 @@ $firstname = $othernames = $message = $email_address = $id_number = $phone_numbe
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail3">Net Salary</label>
-                                            <input type="number" min="1000" class="form-control" id="exampleInputEmail3"
-                                                placeholder="Net salary" name="net_salary">
+                                            <label for="exampleInputEmail3">Station Name</label>
+                                            <select name="station_name" id="" class="form-control">
+                                                <option value="">click to select</option>
+                                                <?php
+                                                include '../db-conection.php';
+                                                $bookingplans = "SELECT * FROM `stations`";
+                                                $querybookingsplans = mysqli_query($conn, $bookingplans);
+                                                $bookingsplansrows = mysqli_num_rows($querybookingsplans);
+                                                if ($bookingsplansrows >= 1) {
+                                                    while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
+                                                        $id = $fetch['station_id']; 
+                                                        $name = $fetch['station_name']; 
+
+
+                                                        echo "<option value='$id'>$name</option>";
+                                                    }
+                                                }
+
+                                                ?>
+                                            </select>
+
                                         </div>
                                     </div>
                                 </div>

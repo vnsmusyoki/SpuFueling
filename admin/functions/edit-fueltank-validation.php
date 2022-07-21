@@ -4,6 +4,7 @@ include '../db-conection.php';
 $name = mysqli_real_escape_string($conn, $_POST['tank_name']);
 $capacity = mysqli_real_escape_string($conn, $_POST['tank_capacity']);
 $tankid = mysqli_real_escape_string($conn, $_POST['tank_id']);
+$station_name = mysqli_real_escape_string($conn, $_POST['station_name']);
 if (
     empty($name) || empty($capacity)
 ) {
@@ -14,7 +15,7 @@ toastr.error('Please Provide all the details');
 ";
 } else {
 
-    $inserttank = "UPDATE `fuel_tank` SET `fuel_tank_name`='$name',`fuel_tank_capacity`='$capacity' WHERE `fuel_tank_id`='$tankid'";
+    $inserttank = "UPDATE `fuel_tank` SET `fuel_tank_ref`='$name',`fuel_tank_capacity`='$capacity', `tank_station_id`='$station_name' WHERE `fuel_tank_id`='$tankid'";
     $querylogin = mysqli_query($conn, $inserttank);
     $lastid = mysqli_insert_id($conn);
     if ($querylogin) {

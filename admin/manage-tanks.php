@@ -49,12 +49,13 @@ require'admin-account.php';
                                 <div class="card-body">
                                     <h4 class="card-title">All Tanks</h4>
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th> ID </th>
                                                     <th> Tank Name </th>
                                                     <th> Tank Capacity </th>
+                                                    <th>Station</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -67,15 +68,23 @@ require'admin-account.php';
                                                 if ($bookingsplansrows >= 1) {
                                                     while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
                                                         $id = $fetch['fuel_tank_id'];
-                                                        $name = $fetch['fuel_tank_name'];
+                                                        $name = $fetch['fuel_tank_ref'];
                                                         $capacity = $fetch['fuel_tank_capacity']; 
+                                                        $stationid = $fetch['tank_station_id'];
 
-
+                                                        $bookingplan = "SELECT * FROM `stations` WHERE `station_id` = '$stationid'";
+                                                        $querybookingsplan = mysqli_query($conn, $bookingplan);
+                                                        $bookingsplansrow = mysqli_num_rows($querybookingsplan);
+                                                        if ($bookingsplansrow >= 1) {
+                                                            while ($fetchs  = mysqli_fetch_assoc($querybookingsplan)) {
+                                                                $station_name = $fetchs['station_name'];
+                                                            }}
                                                         echo "
                                                     
                                                             <tr>
                                                                 <td>$id</td>
                                                                 <td>$name</td>
+                                                                <td>$station_name</td>
                                                                 <td>$capacity Litres</td> 
                                                                 <td>
                                                                 <a href='edit-fuel-tank.php?tank=$id'> <button   class='btn btn-outline-success btn-rounded btn-icon'>

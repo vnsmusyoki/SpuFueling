@@ -1,7 +1,7 @@
 <?php
 require'admin-account.php';
 ?><?php
-$tank_capacity = $tank_name = $message = '';
+$tank_capacity = $tank_name = $message = $station_name = '';
 ?>
 <?php
 $tankid = $_GET['tank'];
@@ -12,7 +12,7 @@ $bookingsrows = mysqli_num_rows($querybookings);
 if ($bookingsrows >= 1) {
     while ($fetch  = mysqli_fetch_assoc($querybookings)) {
         $globalid = $fetch['fuel_tank_id'];
-        $globalname = $fetch['fuel_tank_name'];
+        $globalname = $fetch['fuel_tank_ref'];
         $globalcapacity = $fetch['fuel_tank_capacity'];
     }
     global $globalcapacity;
@@ -83,7 +83,7 @@ if ($bookingsrows >= 1) {
 
 
                                 <div class=" row">
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Tank Name</label>
                                                 <input type="text" class="form-control" id="exampleInputName1"
@@ -92,7 +92,7 @@ if ($bookingsrows >= 1) {
                                             </div>
                                         </div>
                                         <input type="hidden" name="tank_id" value="<?php echo $globalid; ?>">
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Tank Capacity</label>
                                                 <input type="number" min="1" class="form-control" id="exampleInputName1"
@@ -100,36 +100,59 @@ if ($bookingsrows >= 1) {
                                                     value="<?php echo $globalcapacity; ?>">
                                             </div>
                                         </div>
+                                        <div4 class="col-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail3">Station Name</label>
+                                                <select name="station_name" id="" class="form-control">
+                                                    <option value="">click to select</option>
+                                                    <?php
+                                                include '../db-conection.php';
+                                                $bookingplans = "SELECT * FROM `stations`";
+                                                $querybookingsplans = mysqli_query($conn, $bookingplans);
+                                                $bookingsplansrows = mysqli_num_rows($querybookingsplans);
+                                                if ($bookingsplansrows >= 1) {
+                                                    while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
+                                                        $id = $fetch['station_id']; 
+                                                        $name = $fetch['station_name']; 
 
+
+                                                        echo "<option value='$id'>$name</option>";
+                                                    }
+                                                }
+
+                                                ?>
+                                                </select>
+
+                                            </div>
+                                        </div4 </div>
+
+                                        <button type="submit" class="btn btn-gradient-danger mr-2"
+                                            name="createaccount">Edit Fuel Tank</button>
+                                        <button class="btn btn-light" type="reset">Cancel</button>
+                                    </form>
                                 </div>
-
-                                <button type="submit" class="btn btn-gradient-primary mr-2"
-                                    name="createaccount">Submit</button>
-                                <button class="btn btn-light" type="reset">Cancel</button>
-                                </form>
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
-
-
-
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="container-fluid clearfix">
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
+                            Fueling.com 2022</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Shawn <a href="£"></a>
+                            SPU</span>
+                    </div>
+                </footer>
+                <!-- partial -->
             </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:partials/_footer.html -->
-            <footer class="footer">
-                <div class="container-fluid clearfix">
-                    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright ©
-                        Fueling.com 2022</span>
-                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Shawn <a href="£"></a>
-                        SPU</span>
-                </div>
-            </footer>
-            <!-- partial -->
+            <!-- main-panel ends -->
         </div>
-        <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
+        <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->

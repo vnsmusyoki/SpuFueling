@@ -1,7 +1,7 @@
 <?php
-require'admin-account.php';
-?><?php
-$firstname = $othernames = $message = $email_address = $id_number = $phone_number = $net_salary = $residence = $next_of_kin_full_name = $kin_phone_number = $username = $password = '';
+require 'admin-account.php';
+$firstname = $othernames = $message = $email_address = $id_number = $phone_number = $station_name = $residence = $next_of_kin_full_name = $kin_phone_number = $username = $password =
+    '';
 ?>
 <?php
 $tankid = $_GET['id'];
@@ -10,7 +10,7 @@ $bookings = "SELECT * FROM `employee` WHERE `employee_id` = '$tankid'";
 $querybookings = mysqli_query($conn, $bookings);
 $bookingsrows = mysqli_num_rows($querybookings);
 if ($bookingsrows >= 1) {
-    while ($fetch  = mysqli_fetch_assoc($querybookings)) {
+    while ($fetch = mysqli_fetch_assoc($querybookings)) {
         $globalfirstname = $fetch['employee_first_name'];
         $globalthernames = $fetch['employee_other_names'];
         $globalidnumber = $fetch['employee_id_number'];
@@ -19,9 +19,15 @@ if ($bookingsrows >= 1) {
         $globalkinfullname = $fetch['residence_next_of_kin_full_names'];
         $globalkinphonenumber = $fetch['employee_next_of_kin_phone_number'];
         $globalphonenumber = $fetch['employee_phone_number'];
-        $globalnetsalary = $fetch['employee_net_salary'];
     }
-  global $globalfirstname;global $globalthernames;global $globalidnumber;global $globalemail;global $globalresidence;global $globalkinfullname;global $globalkinphonenumber;global $globalphonenumber;global $globalnetsalary;
+    global $globalfirstname;
+    global $globalthernames;
+    global $globalidnumber;
+    global $globalemail;
+    global $globalresidence;
+    global $globalkinfullname;
+    global $globalkinphonenumber;
+    global $globalphonenumber;
 }
 ?>
 <!DOCTYPE html>
@@ -76,13 +82,11 @@ if ($bookingsrows >= 1) {
                                     <h4 class="card-title">Provide the details below</h4>
 
                                     <form class="forms-sample" action="" method="POST" autocomplete="off" ">
-                                      <?php
-
-                                        if (isset($_POST["createaccount"])) {
-
-                                            require 'functions/edit-employee-validation.php';
-                                        }
-                                        ?>
+                                      <?php if (
+                                          isset($_POST['createaccount'])
+                                      ) {
+                                          require 'functions/edit-employee-validation.php';
+                                      } ?>
                                         <?php echo $message; ?>
                                         <div class=" row">
                                         <div class="col-4">
@@ -98,7 +102,7 @@ if ($bookingsrows >= 1) {
                                                 <label for="exampleInputName1">Other Names</label>
                                                 <input type="text" class="form-control" id="exampleInputName1"
                                                     placeholder="Name" name="othernames"
-                                                    value="<?php echo  $globalthernames; ?>">
+                                                    value="<?php echo $globalthernames; ?>">
                                             </div>
                                         </div>
                                         <div class="col-4">
@@ -106,7 +110,7 @@ if ($bookingsrows >= 1) {
                                                 <label for="exampleInputEmail3">Email address</label>
                                                 <input type="text" class="form-control" id="exampleInputEmail3"
                                                     placeholder="Email" name="email_address"
-                                                    value="<?php echo $globalemail;  ?>">
+                                                    value="<?php echo $globalemail; ?>">
                                             </div>
                                         </div>
                                 </div>
@@ -116,7 +120,7 @@ if ($bookingsrows >= 1) {
                                             <label for="exampleInputName1">ID Number</label>
                                             <input type="number" min="1" class="form-control" id="exampleInputName1"
                                                 placeholder="National ID Number" name="id_number"
-                                                value="<?php echo $globalidnumber;  ?>">
+                                                value="<?php echo $globalidnumber; ?>">
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -124,22 +128,52 @@ if ($bookingsrows >= 1) {
                                             <label for="exampleInputName1">Phone Number</label>
                                             <input type="number" min="1" class="form-control" id="exampleInputName1"
                                                 placeholder="Current Phone Number" name="phone_number"
-                                                value="<?php echo $globalphonenumber;  ?>">
+                                                value="<?php echo $globalphonenumber; ?>">
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="exampleInputEmail3">Net Salary</label>
-                                            <input type="number" min="1000" class="form-control" id="exampleInputEmail3"
-                                                placeholder="Net salary" name="net_salary"
-                                                value="<?php echo $globalnetsalary;  ?>">
+                                            <label for="exampleInputEmail3">Station Name</label>
+                                            <select name="station_name" id="" class="form-control">
+                                                <option value="">click to select</option>
+                                                <?php
+                                                include '../db-conection.php';
+                                                $bookingplans =
+                                                    'SELECT * FROM `stations`';
+                                                $querybookingsplans = mysqli_query(
+                                                    $conn,
+                                                    $bookingplans
+                                                );
+                                                $bookingsplansrows = mysqli_num_rows(
+                                                    $querybookingsplans
+                                                );
+                                                if ($bookingsplansrows >= 1) {
+                                                    while (
+                                                        $fetch = mysqli_fetch_assoc(
+                                                            $querybookingsplans
+                                                        )
+                                                    ) {
+                                                        $id =
+                                                            $fetch[
+                                                                'station_id'
+                                                            ];
+                                                        $name =
+                                                            $fetch[
+                                                                'station_name'
+                                                            ];
+                                                        echo "<option value='$id'>$name</option>";
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+
                                         </div>
                                     </div>
                                 </div>
 
                                 <di class="form-group">
                                     <label for="exampleTextarea1">Residence Address</label>
-                                    <textarea class="form-control" id="exampleTextarea1" rows="4" name="residence"><?php echo $globalresidence;  ?>
+                                    <textarea class="form-control" id="exampleTextarea1" rows="4" name="residence"><?php echo $globalresidence; ?>
                                     </textarea>
                                 </di v>
                                 <div class="row">
@@ -148,7 +182,7 @@ if ($bookingsrows >= 1) {
                                             <label for="exampleInputName1">Next of Kin Full Names</label>
                                             <input type="text" class="form-control" id="exampleInputName1"
                                                 placeholder="Kin FUll names" name="next_of_kin_full_name"
-                                                value="<?php echo $globalkinfullname;  ?>">
+                                                value="<?php echo $globalkinfullname; ?>">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -156,7 +190,7 @@ if ($bookingsrows >= 1) {
                                             <label for="exampleInputName1">Next of Kin Phone Number</label>
                                             <input type="number" min="1" class="form-control" id="exampleInputName1"
                                                 placeholder="current phone number for next of kin"
-                                                name="kin_phone_number" value="<?php echo $globalkinphonenumber;  ?>">
+                                                name="kin_phone_number" value="<?php echo $globalkinphonenumber; ?>">
                                         </div>
                                     </div>
 
@@ -164,7 +198,7 @@ if ($bookingsrows >= 1) {
                                 <div class="form-group">
                                     <label for="exampleInputPassword4">Username</label>
                                     <input type="text" class="form-control" id="exampleInputPassword4" name="username"
-                                        placeholder="username" value="<?php echo $globalusername;  ?>">
+                                        placeholder="username" value="<?php echo $globalusername; ?>">
                                 </div>
 
 

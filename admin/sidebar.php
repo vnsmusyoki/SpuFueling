@@ -34,6 +34,9 @@
                      <li class="nav-item"> <a class="nav-link" href="manage-employees.php">Manage
                              Employees</a>
                      </li>
+                     <li class="nav-item"> <a class="nav-link" href="print-employees.php">Generate
+                             Employees</a>
+                     </li>
                  </ul>
              </div>
          </li>

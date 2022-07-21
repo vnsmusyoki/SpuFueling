@@ -1,7 +1,7 @@
 <?php
 require'admin-account.php';
 ?><?php
-$tank_capacity = $tank_name = $message ='';
+$tank_capacity = $tank_name = $message = $station_name='';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,18 +66,43 @@ $tank_capacity = $tank_name = $message ='';
 
 
                                 <div class=" row">
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="form-group">
-                                                <label for="exampleInputName1">Tank Name</label>
+                                                <label for="exampleInputName1">Tank Reference</label>
                                                 <input type="text" class="form-control" id="exampleInputName1"
                                                     placeholder="Add Fuel Tank Name" name="tank_name">
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <div class="form-group">
                                                 <label for="exampleInputName1">Tank Capacity</label>
                                                 <input type="number" min="1" class="form-control" id="exampleInputName1"
                                                     placeholder="write the tank capacity here" name="tank_capacity">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail3">Station Name</label>
+                                                <select name="station_name" id="" class="form-control">
+                                                    <option value="">click to select</option>
+                                                    <?php
+                                                include '../db-conection.php';
+                                                $bookingplans = "SELECT * FROM `stations`";
+                                                $querybookingsplans = mysqli_query($conn, $bookingplans);
+                                                $bookingsplansrows = mysqli_num_rows($querybookingsplans);
+                                                if ($bookingsplansrows >= 1) {
+                                                    while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
+                                                        $id = $fetch['station_id']; 
+                                                        $name = $fetch['station_name']; 
+
+
+                                                        echo "<option value='$id'>$name</option>";
+                                                    }
+                                                }
+
+                                                ?>
+                                                </select>
+
                                             </div>
                                         </div>
 
