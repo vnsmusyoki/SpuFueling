@@ -58,7 +58,7 @@ if ($bookingsplansrows >= 1) {
                         <h3 class="page-title">
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-home"></i>
-                            </span> Add supply_comments
+                            </span> Edit supply comments
                         </h3>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
@@ -126,7 +126,7 @@ if ($bookingsplansrows >= 1) {
                                                     if ($bookingsplansrows >= 1) {
                                                         while ($fetch  = mysqli_fetch_assoc($querybookingsplans)) {
                                                             $id = $fetch['fuel_tank_id'];
-                                                            $name = $fetch['fuel_tank_name'];
+                                                            $name = $fetch['fuel_tank_ref'];
                                                             echo "<option value='$id'>$name</option>";
                                                         }
                                                     }
@@ -159,7 +159,7 @@ if ($bookingsplansrows >= 1) {
                                 </div>
 
 
-                                <button type="submit" class="btn btn-gradient-primary mr-2" name="createaccount">Submit
+                                <button type="submit" class="btn btn-gradient-primary mr-2" name="createaccount">Edit Supply
                                     Supply</button>
                                 <button class="btn btn-light" type="reset">Cancel</button>
                                 </form>

@@ -148,7 +148,7 @@ require'admin-account.php';
                                                         $fetchtank = mysqli_num_rows($querytank);
                                                         if ($fetchtank > 0) {
                                                             while ($fetchtank = mysqli_fetch_assoc($querytank)) {
-                                                                $tankname = $fetchtank['fuel_tank_name'];
+                                                                $tankname = $fetchtank['fuel_tank_ref'];
                                                             }
                                                         }
 

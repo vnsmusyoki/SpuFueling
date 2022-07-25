@@ -110,7 +110,7 @@
                  <ul class="nav flex-column sub-menu">
                      <li class="nav-item"> <a class="nav-link" href="add-supply.php">Add new
                              Supply</a></li>
-                     <li class="nav-item"> <a class="nav-link" href="manage-employees.php">Manage
+                     <li class="nav-item"> <a class="nav-link" href="manage-supplies.php">Manage
                              Supplies</a>
                      </li>
                      <li class="nav-item"> <a class="nav-link" href="print-supplies.php">Print
